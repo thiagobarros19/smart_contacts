@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Contatos</ion-title>
+    <ion-searchbar
+      class="searchbar"
+      slot="end"
+      animated
+      showCancelButton="focus"
+      [style]="activeSearchbar ? 'flex-basis: 180px; visibility: visible;' : 'flex-basis: 125px; visibility: hidden;'"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="changeStatusSearchbar()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+      <ion-button slot="icon-only" [routerLink]="['contact']">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <div class="ion-activatable ripple-parent">
+        Thiago Silva Barros
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="ion-activatable ripple-parent">
+        Lucas Emmanuel
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="ion-activatable ripple-parent">
+        Weverson Barbosa
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
