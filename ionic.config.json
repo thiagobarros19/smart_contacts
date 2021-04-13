@@ -1,0 +1,7 @@
+{
+  "name": "smartcontacts",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
