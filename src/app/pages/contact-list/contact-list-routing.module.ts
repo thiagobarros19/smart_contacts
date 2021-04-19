@@ -10,8 +10,12 @@ const routes: Routes = [
     component: ContactListPage,
   },
   {
-    path: 'contact',
-    component: ContactPage
+    path: 'contact/:id',
+    loadChildren: () => import('../contact/contact.module').then(m => m.ContactPageModule)
+  },
+  {
+    path: 'contact-form',
+    loadChildren: () => import('../contact-form/contact-form.module').then(m => m.ContactFormPageModule)
   }
 ];
 

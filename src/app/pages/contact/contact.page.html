@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button slot="icon-only">
+      <ion-button slot="icon-only" [routerLink]="['/tabs/contact-list']">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Contatos</ion-title>
+    <ion-title>{{contact.name}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button slot="icon-only">
+      <ion-button slot="icon-only" (click)="openPopoverMenu($event)">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -15,5 +15,30 @@
 </ion-header>
 
 <ion-content>
+  <div class="container">
+    <div class="avatar-container flex-center">
+      <img src="assets/image/profile-image.png" class="avatar" alt="" srcset="">
+    </div>
+    <div class="contact-data">
+      <div class="item-contact-data">{{contact.name}}</div>
 
+      <div class="item-contact-data" *ngFor="let phone of contact.phone">
+        <a href="tel:+{{phone}}">{{phone}}</a>
+        <ion-buttons slot="end">
+          <ion-button slot="icon-only">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+
+      <div class="item-contact-data">
+        <a href="mailto:{{contact.mail}}">{{contact.mail}}</a>
+        <ion-buttons slot="end">
+          <ion-button slot="icon-only">
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
 </ion-content>

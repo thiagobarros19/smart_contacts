@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { ContactPageRoutingModule } from './contact-routing.module';
 
 import { ContactPage } from './contact.page';
+import { ContactMenuPopoverComponent } from '../../components/contact-menu-popover/contact-menu-popover.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ContactPageRoutingModule
+    ContactPageRoutingModule,
   ],
-  declarations: [ContactPage]
+  declarations: [
+    ContactPage,
+    ContactMenuPopoverComponent
+  ]
 })
 export class ContactPageModule {}
