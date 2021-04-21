@@ -1,18 +1,24 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button slot="icon-only">
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Contatos</ion-title>
     <ion-searchbar
       class="searchbar"
       slot="end"
       animated
       showCancelButton="focus"
+      [(ngModel)]="searchText"
       [style]="activeSearchbar ? 'flex-basis: 180px; visibility: visible;' : 'flex-basis: 125px; visibility: hidden;'"
     ></ion-searchbar>
     <ion-buttons slot="end">
       <ion-button slot="icon-only" (click)="changeStatusSearchbar()">
         <ion-icon name="search"></ion-icon>
       </ion-button>
-      <ion-button slot="icon-only" [routerLink]="['contact-form']">
+      <ion-button slot="icon-only" [routerLink]="['contact-form/0']">
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -21,21 +27,9 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let c of contacts | filter: searchText">
       <div class="ion-activatable ripple-parent" [routerLink]="['contact/1']">
-        Thiago Silva Barros
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-    </ion-item>
-    <ion-item>
-      <div class="ion-activatable ripple-parent" [routerLink]="['contact/2']">
-        Lucas Emmanuel
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-    </ion-item>
-    <ion-item>
-      <div class="ion-activatable ripple-parent" [routerLink]="['contact/3']">
-        Weverson Barbosa
+        {{c.name}}
         <ion-ripple-effect></ion-ripple-effect>
       </div>
     </ion-item>

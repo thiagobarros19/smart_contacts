@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('../contact/contact.module').then(m => m.ContactPageModule)
   },
   {
-    path: 'contact-form',
+    path: 'contact-form/:id',
     loadChildren: () => import('../contact-form/contact-form.module').then(m => m.ContactFormPageModule)
   }
 ];

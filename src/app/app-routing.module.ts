@@ -9,6 +9,10 @@ const routes: Routes = [
     path: 'contact-form',
     loadChildren: () => import('./pages/contact-form/contact-form.module').then( m => m.ContactFormPageModule)
   },
+  {
+    path: 'group-form',
+    loadChildren: () => import('./pages/group-form/group-form.module').then( m => m.GroupFormPageModule)
+  },
 
 ];
 @NgModule({

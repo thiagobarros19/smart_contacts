@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 import { PopoverController } from '@ionic/angular';
 
+import { Contact } from '../../../interfaces';
+import { mask } from '../../../util';
+
 import { ContactMenuPopoverComponent } from './../../components/contact-menu-popover/contact-menu-popover.component';
 
-interface Contact{
-  name: string;
-  phone: string[];
-  mail: string;
-}
 
 @Component({
   selector: 'app-contact',
@@ -23,14 +22,23 @@ export class ContactPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private popoverCtrl: PopoverController
+    private router: Router,
+    private popoverCtrl: PopoverController,
+    public alertController: AlertController
   ) {
     this.contact = {
       name: "",
       phone: [
-        ""
+        {
+          number: "",
+          whatsapp: false
+        },
+        {
+          number: "",
+          whatsapp: false
+        }
       ],
-      mail: ""
+      email: ""
     }
   }
 
@@ -43,19 +51,31 @@ export class ContactPage implements OnInit {
     switch (id){
       case 1:
         this.contact.name = "Thiago Silva"
-        this.contact.phone[0] = "83999741937"
-        this.contact.phone[1] = "83999741937"
-        this.contact.mail = "thiago.rck00@gmail.com"
+        this.contact.phone[0] = {
+          number: mask("celular", "83999741937"),
+          whatsapp: true
+        };
+        this.contact.phone[1] = {
+          number: mask("celular", "83999741937"),
+          whatsapp: false
+        };
+        this.contact.email = "thiago.rck00@gmail.com"
         break
       case 2:
         this.contact.name = "Lucas Emmanuel"
-        this.contact.phone[0] = "83999999999"
-        this.contact.mail = "exemplo@exemplo.com"
+        this.contact.phone[0] = {
+          number: mask("celular", "83999999999"),
+          whatsapp: false
+        }
+        this.contact.email = "exemplo@exemplo.com"
         break
       case 3:
         this.contact.name = "Weverson Barbosa"
-        this.contact.phone[0] = "83999999999"
-        this.contact.mail = "exemplo@exemplo.com"
+        this.contact.phone[0] = {
+          number: mask("celular", "83999999999"),
+          whatsapp: false
+        }
+        this.contact.email = "exemplo@exemplo.com"
         break
     }
   }
@@ -67,7 +87,11 @@ export class ContactPage implements OnInit {
     })
 
     popover.onDidDismiss().then(
-      data => console.log(data)
+        data => {
+          if(data.data.fromPopoverMenu === "editar"){
+            this.router.navigate([`/tabs/contact-list/contact-form/${this.contactId}`]);
+          }
+        }
     )
 
     return await popover.present();

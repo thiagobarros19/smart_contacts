@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ContactListPageRoutingModule } from './contact-list-routing.module';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { ContactListPage } from './contact-list.page';
 
 @NgModule({
@@ -13,6 +15,7 @@ import { ContactListPage } from './contact-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    Ng2SearchPipeModule,
     ContactListPageRoutingModule
   ],
   declarations: [ContactListPage]

@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { GroupListPageRoutingModule } from './group-list-routing.module';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { GroupListPage } from './group-list.page';
 
 @NgModule({
@@ -13,6 +15,7 @@ import { GroupListPage } from './group-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    Ng2SearchPipeModule,
     GroupListPageRoutingModule
   ],
   declarations: [GroupListPage]
