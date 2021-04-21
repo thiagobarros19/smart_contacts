@@ -1,9 +1,32 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Grupos</ion-title>
+    <ion-searchbar
+      class="searchbar"
+      slot="end"
+      animated
+      showCancelButton="focus"
+      [(ngModel)]="searchText"
+      [style]="activeSearchbar ? 'flex-basis: 180px; visibility: visible;' : 'flex-basis: 125px; visibility: hidden;'"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="changeStatusSearchbar()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+      <ion-button slot="icon-only" [routerLink]="['group-form/0']">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let group of groups | filter: searchText">
+      <div class="ion-activatable ripple-parent" [routerLink]="['group-form/1']">
+        {{group.name}}
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 
+interface MenuItem {
+  title: string;
+  value: string
+}
+
 @Component({
   selector: 'app-contact-menu-popover',
   templateUrl: './contact-menu-popover.component.html',
@@ -8,9 +13,15 @@ import { PopoverController } from '@ionic/angular';
 })
 export class ContactMenuPopoverComponent implements OnInit {
 
-  options: string[] = [
-    "Editar contato",
-    "Remover contato"
+  options: MenuItem[] = [
+    {
+      title: "Editar contato",
+      value: "editar"
+    },
+    {
+      title: "Remover contato",
+      value: "remover"
+    }
   ]
 
   constructor(

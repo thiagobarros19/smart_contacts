@@ -1,9 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>contact-form</ion-title>
+    <ion-buttons slot="start">
+      <ion-button slot="icon-only" routerLink="{{router}}">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="container">
+    <ion-list class="form-list">
+      <form [formGroup]="contact" novalidate>
+        <div class="form-item">
+          <ion-item>
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label position="floating">Nome completo</ion-label>
+            <ion-input formControlName="name"></ion-input>
+          </ion-item>
+        </div>
+        <div class="form-item" formArrayName="phone" *ngFor="let phone of contact.get('phone')['controls']; let i = index;">
+          <ion-item [formGroupName]="i">
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label position="floating">Telefone</ion-label>
+            <ion-input type="tel" formControlName="number"></ion-input>
+          </ion-item>
+        </div>
+        <ion-buttons slot="start">
+          <ion-button (click)="addPhone()">
+            <ion-icon name="add-outline"></ion-icon>
+            Adicionar número
+          </ion-button>
+        </ion-buttons>
+        <div class="form-item">
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+        </div>
+        <ion-button class="form-item" color="primary" (click)="saveContact()">Salvar</ion-button>
+      </form>
+    </ion-list>
+  </div>
 </ion-content>

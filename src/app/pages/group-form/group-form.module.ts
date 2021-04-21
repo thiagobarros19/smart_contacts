@@ -4,21 +4,21 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ContactFormPageRoutingModule } from './contact-form-routing.module';
+import { GroupFormPageRoutingModule } from './group-form-routing.module';
 
-import { ContactFormPage } from './contact-form.page';
+import { GroupFormPage } from './group-form.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ContactFormPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GroupFormPageRoutingModule
   ],
-  declarations: [ContactFormPage],
-  providers:[
-    FormBuilder,
+  declarations: [GroupFormPage],
+  providers: [
+    FormBuilder
   ]
 })
-export class ContactFormPageModule {}
+export class GroupFormPageModule {}

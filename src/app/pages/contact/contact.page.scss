@@ -44,6 +44,7 @@ header {
 
 .container .contact-data .item-contact-data{
   width: 100%;
+  height: 50px;
   padding: 10px 5px;
 
   display: flex;
@@ -53,4 +54,9 @@ header {
 
 .container .contact-data .item-contact-data + .item-contact-data{
   border-top: 1px solid white;
+}
+
+.container .contact-data .item-contact-data a {
+  text-decoration: none;
+  color: #fff;
 }
