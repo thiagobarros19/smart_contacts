@@ -7,7 +7,7 @@ import { PopoverController } from '@ionic/angular';
 import { Contact } from '../../../interfaces';
 import { mask } from '../../../util';
 
-import { ContactMenuPopoverComponent } from './../../components/contact-menu-popover/contact-menu-popover.component';
+import { ContactMenuPopoverComponent } from 'src/app/components/contact-menu-popover/contact-menu-popover.component';
 
 
 @Component({
@@ -17,8 +17,8 @@ import { ContactMenuPopoverComponent } from './../../components/contact-menu-pop
 })
 export class ContactPage implements OnInit {
 
-  contactId: number;
-  contact: Contact;
+  public contactId: number;
+  public contact: Contact;
 
   constructor(
     private route: ActivatedRoute,
@@ -80,16 +80,52 @@ export class ContactPage implements OnInit {
     }
   }
 
+  async removeContactConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Smart Contacts',
+      message: 'Deseja remover este contato?',
+      buttons: [
+        {
+          text: 'Não',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   async openPopoverMenu(event: Event): Promise<void> {
     const popover = await this.popoverCtrl.create({
       component: ContactMenuPopoverComponent,
+      componentProps:{menuItem: [
+        {
+          title: "Editar Contato",
+          value: "editar"
+        },
+        {
+          title: "Remover Contato",
+          value: "remover"
+        }
+      ]},
       event: event
     })
 
     popover.onDidDismiss().then(
         data => {
-          if(data.data.fromPopoverMenu === "editar"){
-            this.router.navigate([`/tabs/contact-list/contact-form/${this.contactId}`]);
+          if(data.data){
+            if(data.data.fromPopoverMenu === "editar"){
+              this.router.navigate([`/tabs/contact-list/contact-form/${this.contactId}`]);
+            }else if(data.data.fromPopoverMenu === "remover"){
+              this.removeContactConfirm();
+            }
           }
         }
     )
