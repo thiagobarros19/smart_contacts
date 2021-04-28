@@ -9,6 +9,10 @@ const routes: Routes = [
     component: GroupListPage
   },
   {
+    path: 'group/:id',
+    loadChildren: () => import('../group/group.module').then(m => m.GroupPageModule)
+  },
+  {
     path: 'group-form/:id',
     loadChildren: () => import('../group-form/group-form.module').then(m => m.GroupFormPageModule)
   }

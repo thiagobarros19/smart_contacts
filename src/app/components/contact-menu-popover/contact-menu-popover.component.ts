@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { PopoverController, NavParams } from '@ionic/angular';
 
 interface MenuItem {
   title: string;
@@ -13,20 +13,14 @@ interface MenuItem {
 })
 export class ContactMenuPopoverComponent implements OnInit {
 
-  options: MenuItem[] = [
-    {
-      title: "Editar contato",
-      value: "editar"
-    },
-    {
-      title: "Remover contato",
-      value: "remover"
-    }
-  ]
+  public options: MenuItem[];
 
   constructor(
-    private popoverCtrl: PopoverController
-  ) { }
+    private popoverCtrl: PopoverController,
+    public navParams: NavParams
+  ) {
+    this.options = this.navParams.data.menuItem;
+  }
 
   ngOnInit() {}
 
