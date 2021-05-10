@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button slot="icon-only" routerLink="/tabs/group-list">
+      <ion-button slot="icon-only" [routerLink]="routerPath">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,11 +16,11 @@
         <div class="form-item">
           <ion-item>
             <ion-icon name="people-outline" slot="start"></ion-icon>
-            <ion-label position="floating">Nome do grupo</ion-label>
+            <ion-label position="floating">Nome do contato</ion-label>
             <ion-input formControlName="name"></ion-input>
           </ion-item>
         </div>
-        <ion-button class="form-item" color="primary" (click)="saveContact()">Salvar</ion-button>
+        <ion-button class="form-item" color="primary" (click)="handleSaveGroup()">Salvar</ion-button>
       </form>
     </ion-list>
   </div>

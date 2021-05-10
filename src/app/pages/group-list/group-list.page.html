@@ -23,7 +23,7 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let group of groups | filter: searchText">
-      <div class="ion-activatable ripple-parent" [routerLink]="['group/1']">
+      <div class="ion-activatable ripple-parent" routerLink="group/{{group.id}}">
         {{group.name}}
         <ion-ripple-effect></ion-ripple-effect>
       </div>

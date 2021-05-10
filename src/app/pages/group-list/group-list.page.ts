@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Group } from '../../../interfaces';
+import { Group } from 'src/interfaces';
+
+import { GroupsService } from 'src/app/service/groups/groups.service';
 
 @Component({
   selector: 'app-group-list',
@@ -13,22 +15,27 @@ export class GroupListPage implements OnInit {
   groups: Group[];
   searchText: string;
 
-  constructor() {
+  constructor(
+    private groupsService: GroupsService
+  ) {
     this.activeSearchbar = false;
     this.groups = [];
     this.searchText = "";
   }
 
   ngOnInit() {
-    this.groups.push({
-      name: "Família"
-    });
-    this.groups.push({
-      name: "Trabalho"
-    });
-    this.groups.push({
-      name: "Amigos"
-    });
+    this.getGroupList();
+  }
+
+  getGroupList(): void {
+    this.groupsService.getGroups().subscribe(
+      response => {
+        this.groups = response;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   changeStatusSearchbar(): void {
