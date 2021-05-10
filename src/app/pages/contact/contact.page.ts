@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormArray } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
 import { PopoverController } from '@ionic/angular';
 
-import { Contact } from '../../../interfaces';
-import { mask } from '../../../util';
+import { ContactsService } from 'src/app/service/contacts/contacts.service';
+
+import { Contact, NumberContact } from 'src/interfaces';
+import { mask } from 'src/util';
 
 import { ContactMenuPopoverComponent } from 'src/app/components/contact-menu-popover/contact-menu-popover.component';
-
 
 @Component({
   selector: 'app-contact',
@@ -20,15 +22,18 @@ export class ContactPage implements OnInit {
   public contactId: number;
   public contact: Contact;
 
+  public phoneNumber: FormArray;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private popoverCtrl: PopoverController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private contactsService: ContactsService
   ) {
     this.contact = {
       name: "",
-      phone: [
+      contact: [
         {
           number: "",
           whatsapp: false
@@ -44,40 +49,37 @@ export class ContactPage implements OnInit {
 
   ngOnInit() {
     this.contactId = parseInt(this.route.snapshot.params.id);
-    this.setContact(this.contactId);
+    this.getContactById(this.contactId);
   }
 
-  setContact(id: number): void{
-    switch (id){
-      case 1:
-        this.contact.name = "Thiago Silva"
-        this.contact.phone[0] = {
-          number: mask("celular", "83999741937"),
-          whatsapp: true
-        };
-        this.contact.phone[1] = {
-          number: mask("celular", "83999741937"),
-          whatsapp: false
-        };
-        this.contact.email = "thiago.rck00@gmail.com"
-        break
-      case 2:
-        this.contact.name = "Lucas Emmanuel"
-        this.contact.phone[0] = {
-          number: mask("celular", "83999999999"),
-          whatsapp: false
-        }
-        this.contact.email = "exemplo@exemplo.com"
-        break
-      case 3:
-        this.contact.name = "Weverson Barbosa"
-        this.contact.phone[0] = {
-          number: mask("celular", "83999999999"),
-          whatsapp: false
-        }
-        this.contact.email = "exemplo@exemplo.com"
-        break
-    }
+  getContactById(id: number): void {
+    this.contactsService.getContactsById(id).subscribe(
+      response => {
+        this.contact.name = response.name
+        this.contact.email = response.email
+        this.contact.contact = [];
+        response.contact.map(response => {
+          this.contact.contact.push({
+            number: response.number,
+            whatsapp: response.whatsapp
+          })
+        })
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  removeContact(id: number): void {
+    this.contactsService.deleteContacts(id).subscribe(
+      response => {
+        this.router.navigate(['/tabs/contact-list']);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   async removeContactConfirm() {
@@ -93,7 +95,7 @@ export class ContactPage implements OnInit {
         {
           text: 'Sim',
           handler: () => {
-            console.log('Confirm Okay');
+            this.removeContact(this.contactId);
           }
         }
       ]

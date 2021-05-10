@@ -4,11 +4,14 @@ export interface NumberContact {
 }
 
 export interface Contact {
+  id?: number;
   name: string;
-  phone: NumberContact[];
+  contact: NumberContact[];
   email: string;
 }
 
 export interface Group {
+  id?: number;
   name: string;
+  edit: boolean;
 }

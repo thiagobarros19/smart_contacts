@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button slot="icon-only" routerLink="{{router}}">
+      <ion-button slot="icon-only" routerLink="{{routerPath}}">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -20,7 +20,7 @@
             <ion-input formControlName="name"></ion-input>
           </ion-item>
         </div>
-        <div class="form-item" formArrayName="phone" *ngFor="let phone of contact.get('phone')['controls']; let i = index;">
+        <div class="form-item" formArrayName="contact" *ngFor="let contact of contact.get('contact')['controls']; let i = index;">
           <ion-item [formGroupName]="i">
             <ion-icon name="call-outline" slot="start"></ion-icon>
             <ion-label position="floating">Telefone</ion-label>
@@ -40,7 +40,7 @@
             <ion-input type="email" formControlName="email"></ion-input>
           </ion-item>
         </div>
-        <ion-button class="form-item" color="primary" (click)="saveContact()">Salvar</ion-button>
+        <ion-button class="form-item" color="primary" (click)="handleSaveContact()">Salvar</ion-button>
       </form>
     </ion-list>
   </div>
