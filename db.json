@@ -1,0 +1,16 @@
+{
+  "contacts": [],
+  "groups": [
+    {
+      "name": "Família",
+      "edit": true,
+      "contacts": [],
+      "id": 1
+    },
+    {
+      "name": "Amigos",
+      "edit": true,
+      "id": 2
+    }
+  ]
+}

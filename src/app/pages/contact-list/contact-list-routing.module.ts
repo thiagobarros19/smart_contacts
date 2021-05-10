@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ContactListPage } from './contact-list.page';
-import { ContactPage } from './../contact/contact.page';
+import { ContactPage } from '../contact/contact.page';
 
 const routes: Routes = [
   {

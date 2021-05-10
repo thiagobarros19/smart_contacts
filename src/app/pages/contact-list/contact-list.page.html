@@ -1,11 +1,13 @@
+
+
 <ion-header>
   <ion-toolbar>
+    <ion-title>Contatos</ion-title>
     <ion-buttons slot="start">
-      <ion-button slot="icon-only">
-        <ion-icon name="menu"></ion-icon>
+      <ion-button slot="icon-only" (click)="openFilterMenu($event)">
+        <ion-icon name="filter"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Contatos</ion-title>
     <ion-searchbar
       class="searchbar"
       slot="end"
@@ -28,7 +30,7 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let c of contacts | filter: searchText">
-      <div class="ion-activatable ripple-parent" [routerLink]="['contact/1']">
+      <div class="ion-activatable ripple-parent" routerLink="contact/{{c.id}}">
         {{c.name}}
         <ion-ripple-effect></ion-ripple-effect>
       </div>

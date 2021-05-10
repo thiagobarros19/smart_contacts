@@ -5,6 +5,8 @@ import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { FormGroup, FormBuilder } from "@angular/forms";
 
+import { GroupsService } from 'src/app/service/groups/groups.service';
+
 import { Group } from 'src/interfaces';
 
 import { ContactMenuPopoverComponent } from 'src/app/components/contact-menu-popover/contact-menu-popover.component';
@@ -26,38 +28,49 @@ export class GroupPage implements OnInit {
     private router: Router,
     private popoverCtrl: PopoverController,
     private formBuilder: FormBuilder,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private groupsService: GroupsService
   ) {
     this.group = {
-      name: ""
+      name: "",
+      edit: true
     }
   }
 
   ngOnInit() {
     this.groupId = parseInt(this.route.snapshot.params.id);
-    this.setGroup(this.groupId);
-
     this.groupForm = this.formBuilder.group({
       name: '',
     });
+
+    this.getGroupsById(this.groupId);
+  }
+
+  getGroupsById(id: number): void {
+    this.groupsService.getGroupsById(id).subscribe(
+      response => {
+        this.group.name = response.name
+        this.group.edit = response.edit
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   addContact(): void {
     console.log(this.groupForm.value);
   }
 
-  setGroup(id: number): void {
-    switch (id){
-      case 1:
-        this.group.name = "Família"
-        break
-      case 2:
-        this.group.name = "Trabalho"
-        break
-      case 3:
-        this.group.name = "Amigos"
-        break
-    }
+  removeGroup(id: number): void {
+    this.groupsService.deleteGroups(id).subscribe(
+      response => {
+        this.router.navigate(['/tabs/group-list']);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   async removeGroupConfirm() {
@@ -73,7 +86,7 @@ export class GroupPage implements OnInit {
         {
           text: 'Sim',
           handler: () => {
-            console.log('Confirm Okay');
+            this.removeGroup(this.groupId);
           }
         }
       ]

@@ -22,11 +22,11 @@
     <div class="contact-data">
       <div class="item-contact-data">{{contact.name}}</div>
 
-      <div class="item-contact-data" *ngFor="let phone of contact.phone">
-        <a href="tel:+{{phone.number}}">{{phone.number}}</a>
-        <ion-buttons slot="end" *ngIf="phone.whatsapp">
+      <div class="item-contact-data" *ngFor="let contact of contact.contact">
+        <a href="tel:+{{contact.number}}">{{contact.number}}</a>
+        <ion-buttons slot="end" *ngIf="contact.whatsapp">
           <ion-button slot="icon-only">
-            <a href="whatsapp://send?&phone=+5511971316111"></a>
+            <a href="whatsapp://send?&phone=+55{{contact.number}}"></a>
             <ion-icon name="logo-whatsapp"></ion-icon>
           </ion-button>
         </ion-buttons>
